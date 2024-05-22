@@ -81,7 +81,7 @@ Create a .env file in the root directory and add the following:
 
 PORT=5000
 
-DATABASE_URL=<mongodb-uri>
+DATABASE_URL=< mongodb-uri >
 
 Start the Server
 
