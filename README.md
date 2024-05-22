@@ -71,7 +71,7 @@ git clone https://github.com/AALabonya/ecommerce-backend.git
 
 cd ecommerce-backend
 
-Install Dependencies
+## Install Dependencies
 
 npm install
 
