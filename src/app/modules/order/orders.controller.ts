@@ -1,15 +1,18 @@
 import { Request, Response } from 'express';
+import orderValidationSchema from './orders.validation';
 import { OrderService } from './orders.service';
+import { TOrder } from './orders.interface';
 
 const createOrder = async (req: Request, res: Response) => {
-    const order = req.body;
+    const payload = req.body;
 
     try {
-        const orders = await OrderService.createOrder(order);
+        const value = orderValidationSchema.parse(payload);
+        const order = await OrderService.createOrder(value as TOrder);
         res.status(201).json({
             success: true,
             message: 'Order created successfully!',
-            data: orders,
+            data: order,
         });
     } catch (error: any) {
         res.status(500).json({
@@ -19,9 +22,10 @@ const createOrder = async (req: Request, res: Response) => {
         });
     }
 };
+
 const getAllOrders = async (req: Request, res: Response) => {
     try {
-        let search: { email?: string } = {};
+        const search: { email?: string } = {};
         if (req.query.email) {
             search.email = req.query.email as string;
         }

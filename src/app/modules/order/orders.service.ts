@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import { TOrder } from './orders.interface';
-import { productsModel } from '../modules/products/product.model';
+import { productsModel } from '../products/product.model';
 import { OrderModal } from './orders.model';
 
 const createOrder = async (order: TOrder) => {

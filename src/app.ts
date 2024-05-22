@@ -8,7 +8,7 @@ import express, {
 
 import cors from 'cors';
 import { ProductsRoute } from './app/modules/products/product.route';
-import { OrderRouter } from './app/order/orders.route';
+import { OrderRouter } from './app/modules/order/orders.route';
 
 const app: Application = express();
 
