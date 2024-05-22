@@ -1,22 +1,27 @@
 import { Types } from 'mongoose';
-import { TOrder } from './orders.interface';
 import { productsModel } from '../products/product.model';
+import { TOrder } from './orders.interface';
 import { OrderModal } from './orders.model';
 
 const createOrder = async (order: TOrder) => {
     try {
-        const findProduct = await productsModel.findOne({
+        const isProductExits = await productsModel.findOne({
             _id: new Types.ObjectId(order.productId),
             'inventory.quantity': { $gte: order.quantity },
         });
 
-        if (findProduct === null) {
+        if (!isProductExits) {
             throw new Error('Insufficient quantity available in inventory');
         }
-        findProduct.inventory.quantity -= order.quantity;
-        findProduct.inventory.inStock = findProduct.inventory.quantity > 0;
+        isProductExits.inventory.quantity = isProductExits.inventory.quantity + order.quantity;
 
-        await findProduct.save();
+        if (isProductExits.inventory.quantity > 0) {
+            isProductExits.inventory.inStock = true;
+        } else {
+            isProductExits.inventory.inStock = true;
+        }
+
+        await isProductExits.save();
 
         const result = await OrderModal.create(order);
         return result;
@@ -27,9 +32,6 @@ const createOrder = async (order: TOrder) => {
 
 const getAllOrders = async (search: { email?: string }) => {
     const result = await OrderModal.find(search);
-    if (result.length <= 0) {
-        throw new Error('Order not found');
-    }
     return result;
 };
 

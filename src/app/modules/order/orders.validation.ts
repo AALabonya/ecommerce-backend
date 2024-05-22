@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const orderValidationSchema = z.object({
-    email: z.string().email('Invalid email format').optional(),
+    email: z.string().email('The email is not valid').optional(),
     productId: z.string().optional(),
     price: z
         .number({

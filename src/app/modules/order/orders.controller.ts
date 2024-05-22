@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import orderValidationSchema from './orders.validation';
-import { OrderService } from './orders.service';
 import { TOrder } from './orders.interface';
+import { OrderService } from './orders.service';
+import orderValidationSchema from './orders.validation';
 
 const createOrder = async (req: Request, res: Response) => {
-    const payload = req.body;
+    const orders = req.body;
 
     try {
-        const value = orderValidationSchema.parse(payload);
+        const value = orderValidationSchema.parse(orders);
         const order = await OrderService.createOrder(value as TOrder);
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             message: 'Order created successfully!',
             data: order,
