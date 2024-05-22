@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { TOrders } from './orders.interface';
+import { TOrder } from './orders.interface';
 
-const orderSchema = new Schema<TOrders>(
+const orderSchema = new Schema<TOrder>(
     {
         email: { type: String, required: true },
         productId: { type: String, required: true },
@@ -11,4 +11,4 @@ const orderSchema = new Schema<TOrders>(
     { versionKey: false },
 );
 
-export const OrderModel = model<TOrders>('orders', orderSchema);
+export const OrderModal = model<TOrder>('order', orderSchema);

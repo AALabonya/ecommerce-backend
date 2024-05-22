@@ -4,7 +4,7 @@ const ordersValidationSchema = z.object({
     email: z
         .string()
         .min(1, { message: 'Email is required' })
-        .email('Please put email format!'),
+        .email('Invalid email format!'),
     productId: z.string().min(1, { message: 'Product Id is required' }),
     price: z.number().min(0, { message: 'Price must be a positive number' }),
     quantity: z
