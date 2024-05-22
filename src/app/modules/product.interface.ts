@@ -1,12 +1,12 @@
-interface Inventory {
+export type Inventory = {
   quantity: Number;
   inStock: boolean;
-}
-interface Variants {
+};
+export type Variants = {
   type: string;
   value: string;
-}
-export interface Product {
+};
+export type TProduct = {
   name: string;
   description: string;
   price: string;
@@ -14,4 +14,4 @@ export interface Product {
   tags: [];
   variants: Variants[];
   inventory: Inventory;
-}
+};
